@@ -34,25 +34,27 @@ GLHF 🚀
 */
 
 const SaveFile = () =>
-  new Promise((res, rej) => {
-    const timeToResolve = faker.number.int({ min: 1000, max: 3000 });
+	new Promise((res, rej) => {
+		const timeToResolve = faker.number.int({ min: 1000, max: 3000 });
 
-    setTimeout(() => {
-      Math.random() > 0.5
-        ? res(`Success: ${faker.system.commonFileName()} saved`)
-        : rej(`Error: ${faker.system.commonFileName()} not saved`);
-    }, timeToResolve);
-  });
+		setTimeout(() => {
+			Math.random() > 0.5
+				? res(`Success: ${faker.system.commonFileName()} saved`)
+				: rej(`Error: ${faker.system.commonFileName()} not saved`);
+		}, timeToResolve);
+	});
 
 function App() {
-  return (
-    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-screen w-screen">
-      <h1>Async Challange</h1>
-      <button className="bg-blue-400" onClick={() => SaveFile()}>
-        Save File
-      </button>
-    </div>
-  );
+	return (
+		<div className="h-screen w-screen">
+			<div className="flex flex-col mx-auto w-64 h-64 justify-evenly">
+				<h1 className="inline-block text-center">Async Challange</h1>
+				<button className="btn-primary" onClick={() => SaveFile()}>
+					Save File
+				</button>
+			</div>
+		</div>
+	);
 }
 
 export default App;
