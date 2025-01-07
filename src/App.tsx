@@ -1,4 +1,7 @@
+import { useState } from 'react';
 import { faker } from '@faker-js/faker';
+
+// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 /*
 # Task Description
@@ -44,14 +47,31 @@ const SaveFile = () =>
 		}, timeToResolve);
 	});
 
+const maxControlNo = 3;
+
 function App() {
+	const [controNo, setControlNo] = useState(1);
+
 	return (
 		<div className="h-screen w-screen">
-			<div className="flex flex-col mx-auto w-64 h-64 justify-evenly">
+			<div className="flex flex-col mx-auto w-64 h-64 gap-4">
 				<h1 className="inline-block text-center">Async Challange</h1>
-				<button className="btn-primary" onClick={() => SaveFile()}>
-					Save File
-				</button>
+				{[...new Array(controNo).keys()].map((key) => (
+					<div key={key} className="mx-auto">
+						<button className="btn-primary" onClick={() => SaveFile()}>
+							{`Save File No ${key + 1}`}
+						</button>
+					</div>
+				))}
+
+				{controNo < maxControlNo && (
+					<button
+						className="material-icons h-12 w-12 border border-2 border-black rounded-full mx-auto"
+						onClick={() => setControlNo((prev) => (prev += 1))}
+					>
+						note_add
+					</button>
+				)}
 			</div>
 		</div>
 	);
