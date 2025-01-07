@@ -36,7 +36,7 @@ GLHF 🚀
 
 */
 
-const SaveFile = () =>
+const saveFile = () =>
 	new Promise((res, rej) => {
 		const timeToResolve = faker.number.int({ min: 1000, max: 3000 });
 
@@ -45,7 +45,9 @@ const SaveFile = () =>
 				? res(`Success: ${faker.system.commonFileName()} saved`)
 				: rej(`Error: ${faker.system.commonFileName()} not saved`);
 		}, timeToResolve);
-	});
+	})
+		.then((value) => console.log(value))
+		.catch((err) => console.log(err));
 
 const maxControlNo = 3;
 
@@ -58,7 +60,7 @@ function App() {
 				<h1 className="inline-block text-center">Async Challange</h1>
 				{[...new Array(controNo).keys()].map((key) => (
 					<div key={key} className="mx-auto">
-						<button className="btn-primary" onClick={() => SaveFile()}>
+						<button className="btn-primary" onClick={() => saveFile()}>
 							{`Save File No ${key + 1}`}
 						</button>
 					</div>
