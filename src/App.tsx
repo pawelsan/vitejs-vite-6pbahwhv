@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { maxControlNo } from './constants';
 import { AddFilePanel, SaveFilePanel } from './components';
 
-// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-
 /*
 # Task Description
 
