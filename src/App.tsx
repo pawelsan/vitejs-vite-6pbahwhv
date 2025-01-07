@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { faker } from '@faker-js/faker';
+import { maxControlNo } from './constants';
+import { AddFilePanel, SaveFilePanel } from './components';
 
 // import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
@@ -36,43 +37,20 @@ GLHF 🚀
 
 */
 
-const saveFile = () =>
-	new Promise((res, rej) => {
-		const timeToResolve = faker.number.int({ min: 1000, max: 3000 });
-
-		setTimeout(() => {
-			Math.random() > 0.5
-				? res(`Success: ${faker.system.commonFileName()} saved`)
-				: rej(`Error: ${faker.system.commonFileName()} not saved`);
-		}, timeToResolve);
-	})
-		.then((value) => console.log(value))
-		.catch((err) => console.log(err));
-
-const maxControlNo = 3;
-
 function App() {
 	const [controNo, setControlNo] = useState(1);
 
 	return (
 		<div className="h-screen w-screen">
-			<div className="flex flex-col mx-auto w-64 h-64 gap-4">
+			<div className="flex flex-col mx-auto w-64 gap-4">
 				<h1 className="inline-block text-center">Async Challange</h1>
-				{[...new Array(controNo).keys()].map((key) => (
-					<div key={key} className="mx-auto">
-						<button className="btn-primary" onClick={() => saveFile()}>
-							{`Save File No ${key + 1}`}
-						</button>
-					</div>
-				))}
-
+				<div className="flex flex-col gap-12">
+					{[...new Array(controNo).keys()].map((no) => (
+						<SaveFilePanel key={no} no={no} />
+					))}
+				</div>
 				{controNo < maxControlNo && (
-					<button
-						className="material-icons h-12 w-12 border border-2 border-black rounded-full mx-auto"
-						onClick={() => setControlNo((prev) => (prev += 1))}
-					>
-						note_add
-					</button>
+					<AddFilePanel setControlNo={setControlNo} />
 				)}
 			</div>
 		</div>
